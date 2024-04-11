@@ -1,0 +1,14 @@
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/bin/Debug/net8.0/ECommerce.V1
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/bin/Debug/net8.0/ECommerce.V1.deps.json
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/bin/Debug/net8.0/ECommerce.V1.runtimeconfig.json
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/bin/Debug/net8.0/ECommerce.V1.dll
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/bin/Debug/net8.0/ECommerce.V1.pdb
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ECommerce.V1.GeneratedMSBuildEditorConfig.editorconfig
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ECommerce.V1.AssemblyInfoInputs.cache
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ECommerce.V1.AssemblyInfo.cs
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ECommerce.V1.csproj.CoreCompileInputs.cache
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ECommerce.V1.dll
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/refint/ECommerce.V1.dll
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ECommerce.V1.pdb
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ECommerce.V1.genruntimeconfig.cache
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ref/ECommerce.V1.dll
