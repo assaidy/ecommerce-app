@@ -12,3 +12,4 @@
 /home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ECommerce.V1.pdb
 /home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ECommerce.V1.genruntimeconfig.cache
 /home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ref/ECommerce.V1.dll
+/home/ahmad/Documents/Coding/CSharp/ECommerce/ECommerce.V1/obj/Debug/net8.0/ECommerce.V1.sourcelink.json
