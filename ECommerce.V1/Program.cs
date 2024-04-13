@@ -2,7 +2,8 @@
 
 public class Program
 {
-    static void Main() {
+    static void Main()
+    {
         var app = new App();
         app.Run();
     }
