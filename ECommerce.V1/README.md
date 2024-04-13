@@ -85,15 +85,7 @@ The system is a standalone terminal-based application. It will not interact with
 ### 5.3 Other Constraints
 - The application will not interact with external systems or databases.
 
-## 6. System Models
-
-### 6.1 Use Case Diagram
-(Include a simple use case diagram here, showing the interactions between the user and the system.)
-
-### 6.2 Class Diagram
-(Include a class diagram here, showing the main classes and their relationships.)
-
-## 7. Future Enhancements
+## 6. Future Enhancements
 - Integration with a database for persistent storage.
 - User authentication and authorization.
 - Online payment processing.
