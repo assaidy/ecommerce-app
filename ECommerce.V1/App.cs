@@ -85,12 +85,15 @@ public class App
             Utils.PrintError("\n[Error] Invalid admin data. Please try again.");
             Console.Write("\nEnter any key to continue...");
             Console.ReadKey();
+            return;
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\nWelcom, admin: '{admin.Name}'");
             Console.ResetColor();
+            Console.Write("\nEnter any key to continue...");
+            Console.ReadKey();
 
             var loggedIn = true;
             while (loggedIn)
@@ -100,10 +103,10 @@ public class App
                 Console.WriteLine("  1) list products");
                 Console.WriteLine("  2) search a product by name");
                 Console.WriteLine("  3) add a product");
-                Console.WriteLine("  4) modify a product by id");
-                Console.WriteLine("  5) remove a product by id");
+                Console.WriteLine("  4) modify a product");
+                Console.WriteLine("  5) remove a product");
                 Console.WriteLine("  6) logout");
-                Console.WriteLine("\nChoose one of these options (1-5)");
+                Console.WriteLine("\nChoose one of these options (1-6)");
 
                 var success = false;
                 while (!success)
@@ -112,16 +115,13 @@ public class App
 
                     switch (choice)
                     {
-                        // FIX: 
-                        // [ ] change the way of listing => depend on numbers(indeces) not id
-                        // [X] display options (modify, remove, cancel) after listing
                         case "1": // list products
-                            ProductProcessor.ListProducts(_stock, true);
+                            ProductProcessor.ListProducts(_stock);
                             success = true;
                             break;
 
                         case "2": // search a product by name
-                            ProductProcessor.SearchProduct(_stock, true);
+                            ProductProcessor.SearchProduct(_stock);
                             success = true;
                             break;
 
@@ -130,14 +130,14 @@ public class App
                             success = true;
                             break;
 
-                        case "4": // modify a product by id
-                            ProductProcessor.ListProducts(_stock, true);
+                        case "4": // modify a product
+                            ProductProcessor.ListProducts(_stock);
                             ProductProcessor.ModifyProduct(_stock);
                             success = true;
                             break;
 
-                        case "5": // remove a product by id
-                            ProductProcessor.ListProducts(_stock, true);
+                        case "5": // remove a product
+                            ProductProcessor.ListProducts(_stock);
                             ProductProcessor.RemoveProduct(_stock);
                             success = true;
                             break;
@@ -166,8 +166,8 @@ public class App
 
         User? customer = null;
 
-        var success = false;
-        while (!success)
+        var loggedIn = false;
+        while (!loggedIn)
         {
             var choice = Utils.PromptForInput("\nEnter a char, [l]ogin or [r]egister: ");
 
@@ -175,12 +175,12 @@ public class App
             {
                 case "r":
                     customer = LoginManager.RegisterUser(_usersList);
-                    success = true;
+                    loggedIn = true;
                     break;
 
                 case "l":
                     customer = LoginManager.LoginUser(_usersList);
-                    success = true;
+                    loggedIn = true;
                     break;
 
                 default:
@@ -192,6 +192,8 @@ public class App
         if (customer is null)
         {
             Utils.PrintError("\n[Error] Invalid customer data. Please try again.");
+            Console.Write("\nEnter any key to continue...");
+            Console.ReadKey();
             return;
         }
         else
@@ -203,13 +205,56 @@ public class App
             Console.ReadKey();
         }
 
-        while (true)
+        // TODO: add customer options 
+        // [X] list product items
+        // [X] search a product item by name
+        // [ ] every user has a cart (class, initialized in the constructor):
+        //     [ ] add product to cart
+        //     [ ] manage cart: (purchase, remove) items from cart
+        // [X] logout
+
+        while (loggedIn)
         {
-            // TODO: add customer options 
-            // [ ] list product items
-            // [ ] search a product item by name
-            // ...
-            // NOTE: if logout => break the loop
+            Console.Clear();
+            Console.WriteLine("Admin Options:");
+            Console.WriteLine("  1) list products");
+            Console.WriteLine("  2) search a product by name");
+            // FIX: replace x with option's number
+            Console.WriteLine("  x) logout");
+            Console.WriteLine("\nChoose one of these options (1-6)");
+
+            var success = false;
+            while (!success)
+            {
+                var choice = Utils.PromptForInput(">> ");
+
+                switch (choice)
+                {
+                    case "1": // list products
+                        ProductProcessor.ListProducts(_stock);
+                        success = true;
+                        break;
+
+                    case "2": // search a product by name
+                        ProductProcessor.SearchProduct(_stock);
+                        success = true;
+                        break;
+
+                    // FIX: replace x with option's number
+                    case "x": // logout
+                        loggedIn = false;
+                        success = true;
+                        break;
+
+                    default:
+                        // FIX: replace x with option's number
+                        Utils.PrintError($"[Error] Invalid option: '{choice}'. Please choose an option between (1-x)");
+                        break;
+                }
+            }
+
+            Console.Write("\nEnter any key to continue...");
+            Console.ReadKey();
         }
     }
 }

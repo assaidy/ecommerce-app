@@ -10,7 +10,7 @@ public static class Utils
         {
             Utils.PrintError("[Error] Invalid input. Please enter something.");
             Console.Write(prompt);
-            input = Console.ReadLine();
+            input = Console.ReadLine()?.Trim();
         }
         return input;
     }

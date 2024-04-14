@@ -2,7 +2,7 @@
 
 public static class ProductProcessor
 {
-    public static void ListProducts(List<ProductItem> productItems, bool isAdmin)
+    public static void ListProducts(List<ProductItem> productItems)
     {
         if (productItems.Count == 0)
         {
@@ -12,46 +12,48 @@ public static class ProductProcessor
         {
             Console.WriteLine(new string('-', 30)); // just a separator
 
-            foreach (var item in productItems)
-                DisplayProductItem(item, isAdmin);
+            for (int i = 0; i < productItems.Count; i++)
+            {
+                Console.WriteLine($"-> {i + 1}");
+                DisplayProductItem(productItems[i]);
+            }
 
-            Utils.PrintNote("[NOTE] please copy the product id you want to modify or remove.");
+            Utils.PrintNote("[NOTE] please copy number of the product you want.");
         }
     }
 
-    private static void DisplayProductItem(ProductItem productItem, bool isAdmin)
+    private static void DisplayProductItem(ProductItem productItem)
     {
         Console.WriteLine($"-> name:        {productItem.Name}");
         Console.WriteLine($"-> description: {productItem.Description}");
         Console.WriteLine($"-> price:       {productItem.Price:C2}");
-        if (isAdmin) Console.WriteLine($"-> id:          '{productItem.Id}'");
         Console.WriteLine();
     }
 
-    public static void SearchProduct(List<ProductItem> productItems, bool isAdmin)
+    public static void SearchProduct(List<ProductItem> productItems)
     {
         var productName = Utils.PromptForInput("product name: ");
 
-        var searchResults = ProductProcessor.SearchProduct(productItems, productName);
-        if (searchResults.Count == 0)
+        var searchChecker = productItems.FirstOrDefault(x => x.Name.Contains(productName, StringComparison.OrdinalIgnoreCase));
+        if (searchChecker is null)
         {
             Utils.PrintError($"\nNo products found with the name: '{productName}'");
         }
         else
         {
-            ProductProcessor.ListProducts(searchResults, isAdmin);
-        }
-    }
+            Console.WriteLine(new string('-', 30)); // just a separator
 
-    public static List<ProductItem> SearchProduct(List<ProductItem> productItems, string productName)
-    {
-        List<ProductItem> result = new();
-        foreach (var item in productItems)
-        {
-            if (item.Name.Contains(productName, StringComparison.OrdinalIgnoreCase))
-                result.Add(item);
+            for (int i = 0; i < productItems.Count; i++)
+            {
+                if (productItems[i].Name.Contains(productName, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine($"-> {i + 1}");
+                    DisplayProductItem(productItems[i]);
+                }
+            }
+
+            Utils.PrintNote("[NOTE] please copy number of the product you want.");
         }
-        return result;
     }
 
     public static void AddProduct(List<ProductItem> productItems)
@@ -82,19 +84,20 @@ public static class ProductProcessor
             return;
         }
 
-        decimal id;
-        while (!decimal.TryParse(Utils.PromptForInput("\nproduct id: "), out id))
+        int index;
+        while (!int.TryParse(Utils.PromptForInput("\nproduct number: "), out index))
         {
-            Utils.PrintError("[Error] Invalid input id. Please enter a valid number.");
+            Utils.PrintError("[Error] Invalid input number. Please enter a valid number.");
         }
 
-        var targetProduct = productItems.FirstOrDefault(x => x.Id == id);
-        if (targetProduct is null)
+        index--;
+        if (index < 0 || index >= productItems.Count)
         {
-            Utils.PrintError("\n[Error] Couldn't remove item. Product not be found.");
+            Utils.PrintError("[Error] Couldn't find item. Invalid item number.");
         }
         else
         {
+            var targetProduct = productItems[index];
             Console.WriteLine("  1) modify name");
             Console.WriteLine("  2) modify price");
             Console.WriteLine("  3) modify description");
@@ -162,18 +165,20 @@ public static class ProductProcessor
             return;
         }
 
-        decimal id;
-        while (!decimal.TryParse(Utils.PromptForInput("\nproduct id: "), out id))
+        int index;
+        while (!int.TryParse(Utils.PromptForInput("\nproduct number: "), out index))
         {
-            Utils.PrintError("[Error] Invalid input id. Please enter a valid number.");
+            Utils.PrintError("[Error] Invalid input number. Please enter a valid number.");
         }
 
-        if (productItems.RemoveAll(x => x.Id == id) == 0)
+        index--;
+        if (index < 0 || index >= productItems.Count)
         {
-            Utils.PrintError("\n[Error] Couldn't remove item. Product not be found.");
+            Utils.PrintError("[Error] Couldn't find item. Invalid item number.");
         }
         else
         {
+            productItems.RemoveAt(index);
             Utils.PrintNote("\nProduct removed successfully.");
         }
     }
