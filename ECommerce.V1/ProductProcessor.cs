@@ -2,24 +2,23 @@
 
 public static class ProductProcessor
 {
-    public static void ListProducts(List<ProductItem> productItems)
+    public static bool ListProducts(List<ProductItem> productItems)
     {
         if (productItems.Count == 0)
         {
             Utils.PrintError("\n[Error] No available products.");
+            return false;
         }
-        else
+
+        Console.WriteLine(new string('-', 30)); // just a separator
+        for (int i = 0; i < productItems.Count; i++)
         {
-            Console.WriteLine(new string('-', 30)); // just a separator
-
-            for (int i = 0; i < productItems.Count; i++)
-            {
-                Console.WriteLine($"-> {i + 1}");
-                DisplayProductItem(productItems[i]);
-            }
-
-            Utils.PrintNote("[NOTE] please copy number of the product you want.");
+            Console.WriteLine($"-> {i + 1}");
+            DisplayProductItem(productItems[i]);
         }
+        Utils.PrintNote("[NOTE] please copy number of the product you want.");
+
+        return true;
     }
 
     private static void DisplayProductItem(ProductItem productItem)
@@ -30,7 +29,7 @@ public static class ProductProcessor
         Console.WriteLine();
     }
 
-    public static void SearchProduct(List<ProductItem> productItems)
+    public static bool SearchProduct(List<ProductItem> productItems)
     {
         var productName = Utils.PromptForInput("product name: ");
 
@@ -38,22 +37,21 @@ public static class ProductProcessor
         if (searchChecker is null)
         {
             Utils.PrintError($"\nNo products found with the name: '{productName}'");
+            return false;
         }
-        else
+
+        Console.WriteLine(new string('-', 30)); // just a separator
+        for (int i = 0; i < productItems.Count; i++)
         {
-            Console.WriteLine(new string('-', 30)); // just a separator
-
-            for (int i = 0; i < productItems.Count; i++)
+            if (productItems[i].Name.Contains(productName, StringComparison.OrdinalIgnoreCase))
             {
-                if (productItems[i].Name.Contains(productName, StringComparison.OrdinalIgnoreCase))
-                {
-                    Console.WriteLine($"-> {i + 1}");
-                    DisplayProductItem(productItems[i]);
-                }
+                Console.WriteLine($"-> {i + 1}");
+                DisplayProductItem(productItems[i]);
             }
-
-            Utils.PrintNote("[NOTE] please copy number of the product you want.");
         }
+        Utils.PrintNote("[NOTE] please copy number of the product you want.");
+
+        return true;
     }
 
     public static void AddProduct(List<ProductItem> productItems)
